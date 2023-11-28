@@ -1,5 +1,6 @@
 package ru.strebkov;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -42,11 +43,7 @@ public class PhoneBook {
         return book.get(name);
     }
 
-    public List<String> printAllNames(){
-        return null;
+    public List<String> printAllNames() {
+        return new ArrayList<>(book.keySet());
     }
-
-
-
-
 }
