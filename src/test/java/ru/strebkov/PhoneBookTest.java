@@ -5,6 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +24,7 @@ class PhoneBookTest {
     @BeforeEach
     void beforeEach() {
         System.out.println("Тест прошел: ");
-            phoneBook.add("Oly", "79990000009");
+            phoneBook.add("Any", "79990000009");
     }
 
     @AfterEach
@@ -84,7 +87,18 @@ class PhoneBookTest {
     @Test
     void findByNameTest( ) {
         String expected = "79990000009";
-        String result = phoneBook.findByName("Oly");
+        String result = phoneBook.findByName("Any");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void printAllNames() {
+        phoneBook.add("Bob", "79990000006");
+        phoneBook.add("Vova", "79990000008");
+
+        List<String> expected = Arrays.asList("Any", "Bob", "Vova" );
+        List<String> result = phoneBook.printAllNames();
 
         assertEquals(expected, result);
     }
