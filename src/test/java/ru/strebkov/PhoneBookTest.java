@@ -21,6 +21,7 @@ class PhoneBookTest {
     @BeforeEach
     void beforeEach() {
         System.out.println("Тест прошел: ");
+            phoneBook.add("Oly", "79990000009");
     }
 
     @AfterEach
@@ -77,11 +78,13 @@ class PhoneBookTest {
     }
 
 
+
+
     @DisplayName("Тест на поиск по имени")
     @Test
-    void findByName( ) {
-        String expected = "79990000004";
-        String result = phoneBook.findByNumber("Pety");
+    void findByNameTest( ) {
+        String expected = "79990000009";
+        String result = phoneBook.findByName("Oly");
 
         assertEquals(expected, result);
     }
