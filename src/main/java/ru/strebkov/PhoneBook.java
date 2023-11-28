@@ -2,6 +2,7 @@ package ru.strebkov;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class PhoneBook {
     private static PhoneBook INSTANCE = null;
@@ -27,7 +28,12 @@ public class PhoneBook {
     }
 
     public String findByNumber(String namberPhone){
-        return  null;
+        String s =  book.entrySet().stream()
+                .filter(b -> b.getValue().equals(namberPhone))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+        return  s;
     }
 
 

@@ -1,7 +1,6 @@
 package ru.strebkov;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -62,17 +61,20 @@ class PhoneBookTest {
         });
     }
 
+//    public static Stream<Arguments> argumentsForFindByNumberTest() {
+//        return Stream.of(Arguments.of( "79990000001", "Bob"),
+//                Arguments.of( "79990000004", null));
+//    }
+
     public static Stream<Arguments> argumentsForFindByNumberTest() {
-        return Stream.of(Arguments.of("Bob", "79990000001"),
-                Arguments.of("Pop", "79990000002"),
-                Arguments.of("Bob", "79990000003"),
-                Arguments.of("Djop", "79990000004"));
+        return Stream.of(Arguments.of( null, "79990000001"),
+                Arguments.of( "Pety", "79990000004"));
     }
 
     @ParameterizedTest
     @MethodSource("argumentsForFindByNumberTest")
     @DisplayName("Тест на поиск имени по номеру телефона")
-    void findByNumberTest(String expected, String namberPhone) {
+    void findByNumberTest( String expected,  String namberPhone) {
         String result = phoneBook.findByNumber(namberPhone);
 
         assertEquals(expected, result);
