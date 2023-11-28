@@ -61,10 +61,6 @@ class PhoneBookTest {
         });
     }
 
-//    public static Stream<Arguments> argumentsForFindByNumberTest() {
-//        return Stream.of(Arguments.of( "79990000001", "Bob"),
-//                Arguments.of( "79990000004", null));
-//    }
 
     public static Stream<Arguments> argumentsForFindByNumberTest() {
         return Stream.of(Arguments.of( null, "79990000001"),
@@ -73,9 +69,19 @@ class PhoneBookTest {
 
     @ParameterizedTest
     @MethodSource("argumentsForFindByNumberTest")
-    @DisplayName("Тест на поиск имени по номеру телефона")
+    @DisplayName("Тест на поиск по номеру телефона")
     void findByNumberTest( String expected,  String namberPhone) {
         String result = phoneBook.findByNumber(namberPhone);
+
+        assertEquals(expected, result);
+    }
+
+
+    @DisplayName("Тест на поиск по имени")
+    @Test
+    void findByName( ) {
+        String expected = "79990000004";
+        String result = phoneBook.findByNumber("Pety");
 
         assertEquals(expected, result);
     }
