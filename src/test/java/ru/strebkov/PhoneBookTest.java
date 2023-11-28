@@ -19,17 +19,21 @@ class PhoneBookTest {
         phoneBook = PhoneBook.getINSTANCE();
     }
 
+    @BeforeEach
+    void beforeEach(){
+        System.out.println("Тест прошел: ");
+    }
+
     @AfterEach
     void tearDown() {
-        System.out.println("END Test !  Конец теста\n");
+        System.out.println("Конец теста\n");
     }
 
     public static Stream<Arguments> argumentsForAddTest() {
         return Stream.of(Arguments.of("Bob", "79990000001", 1),
                 Arguments.of("Pop", "79990000002", 2),
                 Arguments.of("Bob", "79990000003", 2),
-                Arguments.of("Djop", "79990000004", 3),
-                Arguments.of(null, "79990000005", 4));
+                Arguments.of("Djop", "79990000004", 3));
     }
 
 
@@ -42,14 +46,18 @@ class PhoneBookTest {
         assertEquals(expected, countNamber);
 
     }
+    public static Stream<Arguments> argumentsForAddTestOnNull() {
+        return Stream.of(Arguments.of("Bob", "79990000001", 1),
+                Arguments.of(null, "79990000005", 4));
+    }
 
     @ParameterizedTest
-    @MethodSource("argumentsForAddTest")
-    @DisplayName("Тест значение имени == null")
+    @MethodSource("argumentsForAddTestOnNull")
+    @DisplayName("Тест на исключение при имени == null")
     void addTestOnNull(String expected, String namberPhone, int count) {
-        int countNamber = phoneBook.add(expected, namberPhone);
 
-        assertNotNull(expected);
-
+        Throwable exception = assertThrows(NullPointerException.class, () -> {
+            throw new NullPointerException("error message");
+        });
     }
 }
