@@ -20,7 +20,7 @@ class PhoneBookTest {
     }
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         System.out.println("Тест прошел: ");
     }
 
@@ -46,6 +46,7 @@ class PhoneBookTest {
         assertEquals(expected, countNamber);
 
     }
+
     public static Stream<Arguments> argumentsForAddTestOnNull() {
         return Stream.of(Arguments.of("Bob", "79990000001", 1),
                 Arguments.of(null, "79990000005", 4));
@@ -59,5 +60,21 @@ class PhoneBookTest {
         Throwable exception = assertThrows(NullPointerException.class, () -> {
             throw new NullPointerException("error message");
         });
+    }
+
+    public static Stream<Arguments> argumentsForFindByNumberTest() {
+        return Stream.of(Arguments.of("Bob", "79990000001"),
+                Arguments.of("Pop", "79990000002"),
+                Arguments.of("Bob", "79990000003"),
+                Arguments.of("Djop", "79990000004"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("argumentsForFindByNumberTest")
+    @DisplayName("Тест на поиск имени по номеру телефона")
+    void findByNumberTest(String expected, String namberPhone) {
+        String result = phoneBook.findByNumber(namberPhone);
+
+        assertEquals(expected, result);
     }
 }
